@@ -1,5 +1,5 @@
 import { UserValidator } from '../../../user/user.validator'
-import { POST_TYPES } from '../../constants'
+import { POST_TYPES } from '../../../../constants'
 import { PostValidator } from '../../post.validator'
 import { postPropsFixture } from '../fixtures/post.props.fixture'
 

@@ -1,6 +1,6 @@
 import { IValidator } from '../../ports/validator'
 import { UserValidator } from '../user/user.validator'
-import { POST_TYPES } from './constants'
+import { POST_TYPES } from '../../constants'
 import { PostProps } from './post.props'
 
 export class PostValidator implements IValidator<PostProps> {

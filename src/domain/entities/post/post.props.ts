@@ -1,4 +1,4 @@
-import { POST_TYPES } from './constants'
+import { POST_TYPES } from '../../constants'
 
 export type PostType = typeof POST_TYPES[number]
 
