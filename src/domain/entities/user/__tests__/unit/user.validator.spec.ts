@@ -15,56 +15,66 @@ describe('UserValidator', () => {
             expect(validator.isAlphanumericOnly(input)).toBe(false)
         })
     })
-    describe('validate', () => {
+
+    describe('validateUsername', () => {
         describe('username', () => {
-            it('should return error if username is not string', () => {
+            it('should return error is not string', () => {
                 const validator = new UserValidator()
                 const invalidUsernames = [null, undefined, true, 100]
 
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 invalidUsernames.forEach((username: any) => {
-                    const errors = validator.validate(
-                        userPropsFixture({
-                            username,
-                        })
-                    )
+                    const errors = validator.validateUsername(username)
+
                     expect(errors).toContainEqual(
-                        expect.stringContaining(`'username' should be a string`)
+                        expect.stringContaining(`should be a string`)
                     )
                 })
             })
-            it('should return error if username is empty', () => {
+            it('should return error is empty', () => {
                 const validator = new UserValidator()
                 const username = ''
 
-                const errors = validator.validate(
-                    userPropsFixture({
-                        username,
-                    })
-                )
+                const errors = validator.validateUsername(username)
                 expect(errors).toContainEqual(
                     expect.stringContaining(
-                        `'username' should have at least one character`
+                        `should have at least one character`
                     )
                 )
             })
-            it('should return error if username is greater than 14', () => {
+            it('should return error is greater than 14', () => {
                 const validator = new UserValidator()
                 const username = 'greaterthan14charactersusername'
 
-                const errors = validator.validate(
-                    userPropsFixture({
-                        username,
-                    })
-                )
+                const errors = validator.validateUsername(username)
+
                 expect(errors).toContainEqual(
-                    expect.stringContaining(
-                        `'username' should have at most 14 characters`
-                    )
+                    expect.stringContaining(`should have at most 14 characters`)
                 )
             })
         })
+    })
+    describe('validate', () => {
+        it('should call validateUsername and append errors', () => {
+            const validator = new UserValidator()
+            const mockedErrors = [
+                'username mocked error 1',
+                'username mocked error 2',
+            ]
+            const input = userPropsFixture()
 
+            const validateUsernameSpy = jest
+                .spyOn(validator, 'validateUsername')
+                .mockReturnValue(mockedErrors)
+
+            const errors = validator.validate(input)
+            expect(validateUsernameSpy).toBeCalledWith(input.username)
+            expect(errors).toEqual(
+                expect.arrayContaining(
+                    mockedErrors.map((error) => `'username' ${error}`)
+                )
+            )
+        })
         it('should  dont return errors if input is valid', () => {
             const validator = new UserValidator()
             const errors = validator.validate({
