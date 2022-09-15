@@ -1,4 +1,4 @@
-import CONFIG from '../../configs'
+import CONFIG from '../../../config'
 import routes from './routes'
 
 routes.listen(CONFIG.PORT, () => {

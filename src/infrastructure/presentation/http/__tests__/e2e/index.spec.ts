@@ -1,5 +1,5 @@
 import supertest from 'supertest'
-import httpApp from '../../../../src/interfaces/http/routes'
+import httpApp from '../../routes'
 
 describe('PingController', () => {
     describe(`[GET] /ping`, () => {

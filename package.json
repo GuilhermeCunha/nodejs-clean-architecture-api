@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:api": "nodemon --watch src src/interfaces/http/index.ts",
+    "start:api": "nodemon --watch src src/infrastructure/presentation/http/index.ts",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint": "eslint src --ext .ts,.js",
