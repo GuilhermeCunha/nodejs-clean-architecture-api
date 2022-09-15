@@ -1,0 +1,5 @@
+dist
+node_modules
+.env
+posterr-api-mysql-database-volume/
+coverage

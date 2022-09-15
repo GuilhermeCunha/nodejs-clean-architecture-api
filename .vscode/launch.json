@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Start with API",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "yarn run start:api",
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart",
+            "envFile": "${workspaceFolder}/.env",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/**",
+                "!**/node_modules/**"
+            ]
+        }
+    ]
+}
