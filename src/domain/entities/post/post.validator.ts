@@ -29,10 +29,17 @@ export class PostValidator implements IValidator<PostProps> {
                     ','
                 )}`
             )
-        }
-
-        if (!['undefined', 'string'].includes(typeof input.relatedPost)) {
-            errors.push(`'relatedPost' should be a string`)
+        } else {
+            if (input.type === 'original') {
+                if (
+                    input.relatedPost !== undefined &&
+                    input.relatedPost !== null
+                ) {
+                    errors.push(`'relatedPost' should be undefined`)
+                }
+            } else if (typeof input.relatedPost !== 'string') {
+                errors.push(`'relatedPost' should be a string`)
+            }
         }
 
         errors.push(

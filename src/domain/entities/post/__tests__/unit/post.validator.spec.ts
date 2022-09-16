@@ -24,40 +24,67 @@ describe('PostValidator', () => {
             })
         })
         describe('relatedPost', () => {
-            it('should return an error if relatedPost is neither undefined, nor a string', () => {
-                const validator = new PostValidator()
-                const invalidValues = [null, true, 100]
+            describe('when type is original', () => {
+                it('should return an error if relatedPost is defined', () => {
+                    const validator = new PostValidator()
+                    const invalidValues = [false, 100, '']
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                invalidValues.forEach((relatedPost: any) => {
-                    const errors = validator.validate(
-                        postPropsFixture({
-                            relatedPost,
-                        })
-                    )
-                    expect(errors).toContainEqual(
-                        expect.stringContaining(
-                            `'relatedPost' should be a string`
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    invalidValues.forEach((relatedPost: any) => {
+                        const errors = validator.validate(
+                            postPropsFixture({
+                                relatedPost,
+                                type: 'original',
+                            })
                         )
-                    )
+                        expect(errors).toContainEqual(
+                            expect.stringContaining(
+                                `'relatedPost' should be undefined`
+                            )
+                        )
+                    })
                 })
             })
-            it('should not return error if relatedPost is undefine or string', () => {
-                const validator = new PostValidator()
-                const validValues = [undefined, postPropsFixture().id]
+            describe('when type is quote', () => {
+                it('should return an error if relatedPost is undefined or null', () => {
+                    const validator = new PostValidator()
+                    const invalidValues = [undefined, null]
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                validValues.forEach((relatedPost: any) => {
-                    const errors = validator.validate(
-                        postPropsFixture({
-                            relatedPost,
-                        })
-                    )
-                    expect(errors).not.toContainEqual(
-                        expect.stringContaining(
-                            `'relatedPost' should be a string`
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    invalidValues.forEach((relatedPost: any) => {
+                        const errors = validator.validate(
+                            postPropsFixture({
+                                relatedPost,
+                                type: 'quote',
+                            })
                         )
-                    )
+                        expect(errors).toContainEqual(
+                            expect.stringContaining(
+                                `'relatedPost' should be a string`
+                            )
+                        )
+                    })
+                })
+            })
+            describe('when type is repost', () => {
+                it('should return an error if relatedPost is undefined or null', () => {
+                    const validator = new PostValidator()
+                    const invalidValues = [undefined, null]
+
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    invalidValues.forEach((relatedPost: any) => {
+                        const errors = validator.validate(
+                            postPropsFixture({
+                                relatedPost,
+                                type: 'repost',
+                            })
+                        )
+                        expect(errors).toContainEqual(
+                            expect.stringContaining(
+                                `'relatedPost' should be a string`
+                            )
+                        )
+                    })
                 })
             })
         })
