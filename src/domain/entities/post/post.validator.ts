@@ -31,6 +31,10 @@ export class PostValidator implements IValidator<PostProps> {
             )
         }
 
+        if (!['undefined', 'string'].includes(typeof input.relatedPost)) {
+            errors.push(`'relatedPost' should be a string`)
+        }
+
         errors.push(
             ...new UserValidator()
                 .validateUsername(input.author)

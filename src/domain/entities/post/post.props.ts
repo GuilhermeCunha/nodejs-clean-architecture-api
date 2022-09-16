@@ -7,5 +7,6 @@ export type PostProps = {
     author: string
     type: PostType
     content: string
+    relatedPost?: string
     createdAt: Date
 }

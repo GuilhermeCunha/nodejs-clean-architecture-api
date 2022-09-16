@@ -22,6 +22,45 @@ describe('PostValidator', () => {
                     )
                 })
             })
+        })
+        describe('relatedPost', () => {
+            it('should return an error if relatedPost is neither undefined, nor a string', () => {
+                const validator = new PostValidator()
+                const invalidValues = [null, true, 100]
+
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                invalidValues.forEach((relatedPost: any) => {
+                    const errors = validator.validate(
+                        postPropsFixture({
+                            relatedPost,
+                        })
+                    )
+                    expect(errors).toContainEqual(
+                        expect.stringContaining(
+                            `'relatedPost' should be a string`
+                        )
+                    )
+                })
+            })
+            it('should not return error if relatedPost is undefine or string', () => {
+                const validator = new PostValidator()
+                const validValues = [undefined, postPropsFixture().id]
+
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                validValues.forEach((relatedPost: any) => {
+                    const errors = validator.validate(
+                        postPropsFixture({
+                            relatedPost,
+                        })
+                    )
+                    expect(errors).not.toContainEqual(
+                        expect.stringContaining(
+                            `'relatedPost' should be a string`
+                        )
+                    )
+                })
+            })
+        })
         describe('author', () => {
             it('should call UserValidator.validateUsername and append errors', () => {
                 const validator = new PostValidator()
