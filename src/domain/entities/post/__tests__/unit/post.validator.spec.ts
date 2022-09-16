@@ -5,6 +5,23 @@ import { postPropsFixture } from '../fixtures/post.props.fixture'
 
 describe('PostValidator', () => {
     describe('validate', () => {
+        describe('id', () => {
+            it('should return error if id is not string', () => {
+                const validator = new PostValidator()
+                const invalidValues = [null, undefined, true, 100]
+
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                invalidValues.forEach((id: any) => {
+                    const errors = validator.validate(
+                        postPropsFixture({
+                            id,
+                        })
+                    )
+                    expect(errors).toContainEqual(
+                        expect.stringContaining(`'id' should be a string`)
+                    )
+                })
+            })
         describe('author', () => {
             it('should call UserValidator.validateUsername and append errors', () => {
                 const validator = new PostValidator()

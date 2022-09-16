@@ -37,6 +37,15 @@ describe('Post', () => {
             expect(post instanceof Post).toBe(true)
         })
     })
+    describe('get id()', () => {
+        it('should return the id from props', () => {
+            const input = postPropsFixture()
+            jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
+            const post = Post.create(input)
+
+            expect(post.id).toEqual(input.id)
+        })
+    })
     describe('get author()', () => {
         it('should return the author from props', () => {
             const input = postPropsFixture()

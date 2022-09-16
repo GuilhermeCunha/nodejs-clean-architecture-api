@@ -8,5 +8,6 @@ export const postPropsFixture = (
     content: 'post content',
     type: 'original',
     createdAt: new Date(),
+    id: 'a9fdab53-a149-43d9-b796-a71eaa5d0571',
     ...override,
 })

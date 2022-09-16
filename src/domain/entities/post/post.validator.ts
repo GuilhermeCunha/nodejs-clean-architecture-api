@@ -7,6 +7,10 @@ export class PostValidator implements IValidator<PostProps> {
     validate(input: PostProps): string[] {
         const errors: string[] = []
 
+        if (typeof input.id !== 'string') {
+            errors.push(`'id' should be a string`)
+        }
+
         if (typeof input.content !== 'string') {
             errors.push(`'content' should be a string`)
         } else {

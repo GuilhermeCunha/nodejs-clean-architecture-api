@@ -16,6 +16,9 @@ export class Post {
         return new Post(props)
     }
 
+    get id(): string {
+        return this.props.id
+    }
     get author(): string {
         return this.props.author
     }
