@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:api": "nodemon --watch src src/infrastructure/presentation/http/index.ts",
+    "dev:api": "nodemon --watch src src/infrastructure/presentation/http/index.ts",
+    "start:api": "node dist/infrastructure/presentation/http/index.js",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint": "eslint src --ext .ts,.js",
@@ -15,11 +16,7 @@
     "test:integration": "jest --passWithNoTests --testPathPattern=__tests__/instegration",
     "test:e2e": "jest --passWithNoTests --testPathPattern=__tests__/e2e",
     "build": "tsc",
-    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-    "migration:create": "yarn run typeorm migration:create -d ./src/infrastructure/respositories/typeorm/data-source.ts",
-    "migration:generate": "yarn run typeorm migration:generate -d ./src/infrastructure/respositories/typeorm/data-source.ts",
-    "migration:up": "yarn run typeorm migration:run -d ./src/infrastructure/respositories/typeorm/data-source.ts",
-    "migration:revert": "yarn run typeorm migration:revert -d ./src/infrastructure/respositories/typeorm/data-source.ts"
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
@@ -27,7 +24,8 @@
     "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.7",
+    "sqlite3": "^5.1.1",
+    "typeorm": "^0.3.9",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
