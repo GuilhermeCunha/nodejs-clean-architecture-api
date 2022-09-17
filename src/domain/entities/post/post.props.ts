@@ -16,7 +16,7 @@ export type RepostPostProps = {
     id: string
     author: string
     content: undefined
-    relatedPost?: string
+    relatedPost: string
     createdAt: Date
 }
 
