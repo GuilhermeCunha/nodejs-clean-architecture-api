@@ -39,6 +39,7 @@ export class CreateOriginalPostUseCase implements ICreateOriginalPostUseCase {
         const originalPostProps: OriginalPostProps = {
             ...input,
             id,
+            createdAt: new Date(),
         }
         const entity = Post.create(originalPostProps)
 

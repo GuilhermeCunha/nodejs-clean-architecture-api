@@ -110,9 +110,11 @@ describe('CreateOriginalPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = originalPostPropsFixture()
+            jest.useFakeTimers()
             const originalPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')
@@ -166,9 +168,11 @@ describe('CreateOriginalPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = originalPostPropsFixture()
+            jest.useFakeTimers()
             const originalPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')
@@ -196,9 +200,11 @@ describe('CreateOriginalPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = originalPostPropsFixture()
+            jest.useFakeTimers()
             const originalPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')

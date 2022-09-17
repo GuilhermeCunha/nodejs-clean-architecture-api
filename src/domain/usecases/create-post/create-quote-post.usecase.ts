@@ -39,6 +39,7 @@ export class CreateQuotePostUseCase implements ICreateQuotePostUseCase {
         const quotePostProps: QuotePostProps = {
             ...input,
             id,
+            createdAt: new Date(),
         }
         const entity = Post.create(quotePostProps)
 

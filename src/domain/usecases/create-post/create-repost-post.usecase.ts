@@ -39,6 +39,7 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
         const repostPostProps: RepostPostProps = {
             ...input,
             id,
+            createdAt: new Date(),
         }
         const entity = Post.create(repostPostProps)
 

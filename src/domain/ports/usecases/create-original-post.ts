@@ -1,6 +1,6 @@
 import { OriginalPostProps } from '../../entities/post/post.props'
 
-export type CreateOriginalInput = Omit<OriginalPostProps, 'id'>
+export type CreateOriginalInput = Omit<OriginalPostProps, 'id' | 'createdAt'>
 
 export type CreateOriginalPostOutput = OriginalPostProps
 

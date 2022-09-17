@@ -119,9 +119,11 @@ describe('CreateRepostPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = repostPostPropsFixture()
+            jest.useFakeTimers()
             const repostPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')
@@ -199,9 +201,11 @@ describe('CreateRepostPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = repostPostPropsFixture()
+            jest.useFakeTimers()
             const repostPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')
@@ -230,9 +234,11 @@ describe('CreateRepostPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = repostPostPropsFixture()
+            jest.useFakeTimers()
             const repostPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')
@@ -263,9 +269,11 @@ describe('CreateRepostPostUseCase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any)
             const input = repostPostPropsFixture()
+            jest.useFakeTimers()
             const repostPostProps = {
                 ...input,
                 id: mockedId,
+                createdAt: new Date(),
             }
 
             jest.spyOn(useCase.props.identifierFactory, 'create')
