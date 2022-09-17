@@ -157,34 +157,6 @@ describe('CreateRepostPostUseCase', () => {
 
             expect(() => useCase.execute(input)).rejects.toThrow(NotFoundError)
         })
-        it('should throw NotAllowedError when related post was created by the same author', async () => {
-            const mockedId = '12312'
-            const input = repostPostPropsFixture()
-            const useCase = new CreateRepostPostUseCase({
-                identifierFactory: {
-                    create: jest.fn().mockReturnValue(mockedId),
-                },
-                postRepository: {
-                    createPost: jest.fn(),
-                    getPostById: jest.fn().mockResolvedValue({
-                        type: 'original',
-                        author: input.author,
-                    }),
-                },
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any)
-
-            jest.spyOn(useCase.props.identifierFactory, 'create')
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            jest.spyOn(Post, 'create').mockReturnValue(input as any)
-            jest.spyOn(useCase, 'validateDailyLimit').mockImplementation(
-                jest.fn()
-            )
-
-            expect(() => useCase.execute(input)).rejects.toThrow(
-                NotAllowedError
-            )
-        })
         it('should throw NotAllowedError when related post is repost', async () => {
             const mockedId = '12312'
             const input = repostPostPropsFixture()

@@ -51,12 +51,6 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
             })
         }
 
-        if (relatedPost.author === entity.author) {
-            throw new NotAllowedError({
-                meessage: `You cannot repost a post created by you`,
-            })
-        }
-
         if (relatedPost.type !== 'original' && relatedPost.type !== 'quote') {
             throw new NotAllowedError({
                 meessage: `You can only repost posts from the types: original, quote`,
