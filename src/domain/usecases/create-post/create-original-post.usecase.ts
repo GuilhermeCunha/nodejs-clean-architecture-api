@@ -9,14 +9,14 @@ import {
     ICreateOriginalPostUseCase,
 } from '../../ports/usecases/create-original-post'
 
-export type CreatePostProps = {
+export type CreateOriginalPostUseCaseProps = {
     identifierFactory: IIdentifierFactory
     postRepository: IPostRepository
 }
 
 export class CreateOriginalPostUseCase implements ICreateOriginalPostUseCase {
-    props: CreatePostProps
-    constructor(props: CreatePostProps) {
+    props: CreateOriginalPostUseCaseProps
+    constructor(props: CreateOriginalPostUseCaseProps) {
         this.props = props
     }
 
