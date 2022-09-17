@@ -6,7 +6,7 @@ export class UserValidator implements IValidator<UserProps> {
         return new RegExp(/^[a-z0-9]+$/i).test(text)
     }
 
-    validateUsername(username: string) {
+    validateUsername(username?: string) {
         const errors: string[] = []
 
         if (typeof username !== 'string') {
