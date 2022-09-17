@@ -25,7 +25,7 @@ export class Post {
     get type(): PostType {
         return this.props.type
     }
-    get content(): string {
+    get content(): string | undefined {
         return this.props.content
     }
     get createdAt(): Date {

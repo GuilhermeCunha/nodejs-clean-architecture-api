@@ -1,7 +1,7 @@
 import { ValidationError } from '../../../../errors/validation.error'
 import { Post } from '../../post.entity'
 import { PostValidator } from '../../post.validator'
-import { postPropsFixture } from '../fixtures/post.props.fixture'
+import { originalPostPropsFixture } from '../fixtures/post.props.fixture'
 
 describe('Post', () => {
     beforeEach(() => {
@@ -12,7 +12,7 @@ describe('Post', () => {
     })
     describe('create', () => {
         it('should call PostValidator.validate function', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             const validateSpy = jest.spyOn(PostValidator.prototype, 'validate')
             try {
                 Post.create(input)
@@ -23,7 +23,7 @@ describe('Post', () => {
             expect(validateSpy).toBeCalledWith(input)
         })
         it('should throw ValidationError if validation return errors', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([
                 'error',
             ])
@@ -33,13 +33,13 @@ describe('Post', () => {
 
         it('should return a instance of Post if input is valid', () => {
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
-            const post = Post.create(postPropsFixture())
+            const post = Post.create(originalPostPropsFixture())
             expect(post instanceof Post).toBe(true)
         })
     })
     describe('get id()', () => {
         it('should return the id from props', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
@@ -48,7 +48,7 @@ describe('Post', () => {
     })
     describe('get relatedPost()', () => {
         it('should return the relatedPost from props', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
@@ -57,7 +57,7 @@ describe('Post', () => {
     })
     describe('get author()', () => {
         it('should return the author from props', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
@@ -66,7 +66,7 @@ describe('Post', () => {
     })
     describe('get type()', () => {
         it('should return the type from props', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
@@ -75,7 +75,7 @@ describe('Post', () => {
     })
     describe('get content()', () => {
         it('should return the content from props', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
@@ -84,7 +84,7 @@ describe('Post', () => {
     })
     describe('get createdAt()', () => {
         it('should return the createdAt from props', () => {
-            const input = postPropsFixture()
+            const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
