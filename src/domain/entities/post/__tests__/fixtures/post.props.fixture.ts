@@ -8,7 +8,7 @@ import {
 export const originalPostPropsFixture = (
     override: Partial<OriginalPostProps> = {}
 ): OriginalPostProps => ({
-    author: userPropsFixture().username,
+    authorId: userPropsFixture().username,
     content: 'post content',
     type: 'original',
     createdAt: new Date(),
@@ -20,7 +20,7 @@ export const originalPostPropsFixture = (
 export const repostPostPropsFixture = (
     override: Partial<RepostPostProps> = {}
 ): RepostPostProps => ({
-    author: userPropsFixture().username,
+    authorId: userPropsFixture().username,
     content: undefined,
     type: 'repost',
     createdAt: new Date(),
@@ -32,7 +32,7 @@ export const repostPostPropsFixture = (
 export const quotePostPropsFixture = (
     override: Partial<QuotePostProps> = {}
 ): QuotePostProps => ({
-    author: userPropsFixture().username,
+    authorId: userPropsFixture().username,
     content: '12312313 asdasasds',
     type: 'quote',
     createdAt: new Date(),

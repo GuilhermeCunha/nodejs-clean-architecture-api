@@ -19,7 +19,7 @@ export class PostValidator implements IValidator<PostProps> {
 
         errors.push(...this.validateId(input.id))
         errors.push(...this.validateRelatedPost(input.relatedPost))
-        errors.push(...this.validateAuthor(input.author))
+        errors.push(...this.validateAuthor(input.authorId))
 
         if (typeof input.content !== 'undefined') {
             errors.push(`'content' should be undefined`)
@@ -36,8 +36,8 @@ export class PostValidator implements IValidator<PostProps> {
         }
 
         errors.push(...this.validateId(input.id))
-        errors.push(...this.validateAuthor(input.author))
-        errors.push(...this.validateContent(input.author))
+        errors.push(...this.validateAuthor(input.authorId))
+        errors.push(...this.validateContent(input.authorId))
 
         if (typeof input.relatedPost !== 'undefined') {
             errors.push(`'relatedPost' should be undefined`)
@@ -54,8 +54,8 @@ export class PostValidator implements IValidator<PostProps> {
         }
 
         errors.push(...this.validateId(input.id))
-        errors.push(...this.validateAuthor(input.author))
-        errors.push(...this.validateContent(input.author))
+        errors.push(...this.validateAuthor(input.authorId))
+        errors.push(...this.validateContent(input.authorId))
         errors.push(...this.validateRelatedPost(input.relatedPost))
 
         return errors
@@ -107,10 +107,10 @@ export class PostValidator implements IValidator<PostProps> {
         return errors
     }
 
-    validateAuthor(author?: string) {
+    validateAuthor(authorId?: string) {
         return new UserValidator()
-            .validateUsername(author)
-            .map((error) => `'author' ${error}`)
+            .validateUsername(authorId)
+            .map((error) => `'authorId' ${error}`)
     }
 
     validate(input: PostProps): string[] {

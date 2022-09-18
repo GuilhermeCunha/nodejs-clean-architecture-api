@@ -20,15 +20,15 @@ export class CreateOriginalPostUseCase implements ICreateOriginalPostUseCase {
         this.props = props
     }
 
-    async validateDailyLimit(author: string): Promise<void> {
+    async validateDailyLimit(authorId: string): Promise<void> {
         const today = new Date()
         const postsMadeToday =
             await this.props.postRepository.countPostsByUserInADay(
-                author,
+                authorId,
                 today
             )
 
-        if (postsMadeToday > 5) throw new DailyPostLimitError(author)
+        if (postsMadeToday > 5) throw new DailyPostLimitError(authorId)
     }
 
     async execute(
@@ -43,7 +43,7 @@ export class CreateOriginalPostUseCase implements ICreateOriginalPostUseCase {
         }
         const entity = Post.create(originalPostProps)
 
-        await this.validateDailyLimit(entity.author)
+        await this.validateDailyLimit(entity.authorId)
 
         await this.props.postRepository.createPost(originalPostProps)
 

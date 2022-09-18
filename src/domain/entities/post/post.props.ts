@@ -5,7 +5,7 @@ export type PostType = typeof POST_TYPES[number]
 export type OriginalPostProps = {
     type: 'original'
     id: string
-    author: string
+    authorId: string
     content: string
     relatedPost?: undefined
     createdAt: Date
@@ -14,7 +14,7 @@ export type OriginalPostProps = {
 export type RepostPostProps = {
     type: 'repost'
     id: string
-    author: string
+    authorId: string
     content: undefined
     relatedPost: string
     createdAt: Date
@@ -23,7 +23,7 @@ export type RepostPostProps = {
 export type QuotePostProps = {
     type: 'quote'
     id: string
-    author: string
+    authorId: string
     content: string
     relatedPost: string
     createdAt: Date

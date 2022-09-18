@@ -28,10 +28,10 @@ describe('CreateOriginalPostUseCase', () => {
                 .spyOn(useCase.props.postRepository, 'countPostsByUserInADay')
                 .mockImplementation(jest.fn())
 
-            await useCase.validateDailyLimit(input.author)
+            await useCase.validateDailyLimit(input.authorId)
 
             expect(countPostsByUserInADaySpy).toBeCalledWith(
-                input.author,
+                input.authorId,
                 today
             )
         })
@@ -50,7 +50,7 @@ describe('CreateOriginalPostUseCase', () => {
             ).mockResolvedValue(6)
 
             expect(() =>
-                useCase.validateDailyLimit(input.author)
+                useCase.validateDailyLimit(input.authorId)
             ).rejects.toThrow(DailyPostLimitError)
         })
         it('should resolves if count is less than or equal 5', () => {
@@ -67,7 +67,7 @@ describe('CreateOriginalPostUseCase', () => {
                 } as any)
 
                 expect(() =>
-                    useCase.validateDailyLimit(input.author)
+                    useCase.validateDailyLimit(input.authorId)
                 ).not.toThrow()
             }
         })
@@ -154,7 +154,7 @@ describe('CreateOriginalPostUseCase', () => {
 
             await useCase.execute(input)
 
-            expect(spy).toBeCalledWith(originalPostProps.author)
+            expect(spy).toBeCalledWith(originalPostProps.authorId)
         })
         it('should call postRepository.createPost', async () => {
             const mockedId = '12312'

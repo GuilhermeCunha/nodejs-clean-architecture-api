@@ -55,13 +55,13 @@ describe('Post', () => {
             expect(post.relatedPost).toEqual(input.relatedPost)
         })
     })
-    describe('get author()', () => {
-        it('should return the author from props', () => {
+    describe('get authorId()', () => {
+        it('should return the authorId from props', () => {
             const input = originalPostPropsFixture()
             jest.spyOn(PostValidator.prototype, 'validate').mockReturnValue([])
             const post = Post.create(input)
 
-            expect(post.author).toEqual(input.author)
+            expect(post.authorId).toEqual(input.authorId)
         })
     })
     describe('get type()', () => {
