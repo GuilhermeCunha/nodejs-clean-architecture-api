@@ -12,7 +12,7 @@ export const originalPostPropsFixture = (
     content: 'post content',
     type: 'original',
     createdAt: new Date(),
-    relatedPost: undefined,
+    relatedPostId: undefined,
     id: 'a9fdab53-a149-43d9-b796-a71eaa5d0571',
     ...override,
 })
@@ -24,7 +24,7 @@ export const repostPostPropsFixture = (
     content: undefined,
     type: 'repost',
     createdAt: new Date(),
-    relatedPost: 'bb9fdab53-a149-43d9-b796-a71eaa5d0571',
+    relatedPostId: 'bb9fdab53-a149-43d9-b796-a71eaa5d0571',
     id: 'a9fdab53-a149-43d9-b796-a71eaa5d0571',
     ...override,
 })
@@ -36,7 +36,7 @@ export const quotePostPropsFixture = (
     content: '12312313 asdasasds',
     type: 'quote',
     createdAt: new Date(),
-    relatedPost: 'bb9fdab53-a149-43d9-b796-a71eaa5d0571',
+    relatedPostId: 'bb9fdab53-a149-43d9-b796-a71eaa5d0571',
     id: 'a9fdab53-a149-43d9-b796-a71eaa5d0571',
     ...override,
 })

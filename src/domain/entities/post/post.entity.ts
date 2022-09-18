@@ -31,7 +31,7 @@ export class Post {
     get createdAt(): Date {
         return this.props.createdAt
     }
-    get relatedPost(): string | undefined {
-        return this.props.relatedPost
+    get relatedPostId(): string | undefined {
+        return this.props.relatedPostId
     }
 }

@@ -18,7 +18,7 @@ export class PostValidator implements IValidator<PostProps> {
         }
 
         errors.push(...this.validateId(input.id))
-        errors.push(...this.validateRelatedPost(input.relatedPost))
+        errors.push(...this.validateRelatedPost(input.relatedPostId))
         errors.push(...this.validateAuthor(input.authorId))
 
         if (typeof input.content !== 'undefined') {
@@ -39,8 +39,8 @@ export class PostValidator implements IValidator<PostProps> {
         errors.push(...this.validateAuthor(input.authorId))
         errors.push(...this.validateContent(input.authorId))
 
-        if (typeof input.relatedPost !== 'undefined') {
-            errors.push(`'relatedPost' should be undefined`)
+        if (typeof input.relatedPostId !== 'undefined') {
+            errors.push(`'relatedPostId' should be undefined`)
         }
 
         return errors
@@ -56,7 +56,7 @@ export class PostValidator implements IValidator<PostProps> {
         errors.push(...this.validateId(input.id))
         errors.push(...this.validateAuthor(input.authorId))
         errors.push(...this.validateContent(input.authorId))
-        errors.push(...this.validateRelatedPost(input.relatedPost))
+        errors.push(...this.validateRelatedPost(input.relatedPostId))
 
         return errors
     }
@@ -97,11 +97,11 @@ export class PostValidator implements IValidator<PostProps> {
         return errors
     }
 
-    validateRelatedPost(relatedPost?: string) {
+    validateRelatedPost(relatedPostId?: string) {
         const errors: string[] = []
 
-        if (typeof relatedPost !== 'string') {
-            errors.push(`'relatedPost' should be a string`)
+        if (typeof relatedPostId !== 'string') {
+            errors.push(`'relatedPostId' should be a string`)
         }
 
         return errors

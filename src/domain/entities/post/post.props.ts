@@ -7,7 +7,7 @@ export type OriginalPostProps = {
     id: string
     authorId: string
     content: string
-    relatedPost?: undefined
+    relatedPostId?: undefined
     createdAt: Date
 }
 
@@ -16,7 +16,7 @@ export type RepostPostProps = {
     id: string
     authorId: string
     content: undefined
-    relatedPost: string
+    relatedPostId: string
     createdAt: Date
 }
 
@@ -25,7 +25,7 @@ export type QuotePostProps = {
     id: string
     authorId: string
     content: string
-    relatedPost: string
+    relatedPostId: string
     createdAt: Date
 }
 

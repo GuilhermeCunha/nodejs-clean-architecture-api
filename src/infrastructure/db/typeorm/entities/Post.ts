@@ -11,7 +11,7 @@ export class PostEntity {
     @Column()
     content: undefined
     @Column()
-    relatedPost!: string
+    relatedPostId!: string
     @Column()
     createdAt!: Date
 }

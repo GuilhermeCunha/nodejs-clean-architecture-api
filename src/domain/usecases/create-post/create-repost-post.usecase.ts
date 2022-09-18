@@ -43,16 +43,19 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
         }
         const entity = Post.create(repostPostProps)
 
-        const relatedPost = await this.props.postRepository.getPostById(
-            repostPostProps.relatedPost
+        const relatedPostId = await this.props.postRepository.getPostById(
+            repostPostProps.relatedPostId
         )
-        if (!relatedPost) {
+        if (!relatedPostId) {
             throw new NotFoundError({
-                meessage: `Post ${repostPostProps.relatedPost} was not found`,
+                meessage: `Post ${repostPostProps.relatedPostId} was not found`,
             })
         }
 
-        if (relatedPost.type !== 'original' && relatedPost.type !== 'quote') {
+        if (
+            relatedPostId.type !== 'original' &&
+            relatedPostId.type !== 'quote'
+        ) {
             throw new NotAllowedError({
                 meessage: `You can only repost posts from the types: original, quote`,
             })

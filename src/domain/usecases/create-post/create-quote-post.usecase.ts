@@ -43,16 +43,19 @@ export class CreateQuotePostUseCase implements ICreateQuotePostUseCase {
         }
         const entity = Post.create(quotePostProps)
 
-        const relatedPost = await this.props.postRepository.getPostById(
-            quotePostProps.relatedPost
+        const relatedPostId = await this.props.postRepository.getPostById(
+            quotePostProps.relatedPostId
         )
-        if (!relatedPost) {
+        if (!relatedPostId) {
             throw new NotFoundError({
-                meessage: `Post ${quotePostProps.relatedPost} was not found`,
+                meessage: `Post ${quotePostProps.relatedPostId} was not found`,
             })
         }
 
-        if (relatedPost.type !== 'original' && relatedPost.type !== 'repost') {
+        if (
+            relatedPostId.type !== 'original' &&
+            relatedPostId.type !== 'repost'
+        ) {
             throw new NotAllowedError({
                 meessage: `You can only quote posts from the types: original, repost`,
             })
