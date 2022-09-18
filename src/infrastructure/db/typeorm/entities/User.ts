@@ -1,14 +1,10 @@
-import { Entity, Column, OneToMany } from 'typeorm'
-import { PostEntity } from './Post'
-
-@Entity()
+import { Entity, Column } from 'typeorm'
+@Entity('user')
 export class UserEntity {
     @Column({ primary: true })
+    id!: string
+    @Column({ unique: true })
     username!: string
-
     @Column()
     createdAt!: Date
-
-    @OneToMany(() => PostEntity, (photo) => photo.user)
-    posts!: PostEntity[]
 }
