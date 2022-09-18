@@ -1,0 +1,27 @@
+version: '3.6'
+
+services:
+    db:
+        ports:
+            - '3306:3306'
+        image: mysql:latest
+        environment:
+            MYSQL_DATABASE: strider
+            MYSQL_ROOT_PASSWORD: strider
+            MYSQL_USER: strider
+        restart: always
+    api:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        ports:
+            - '3333:3333'
+        depends_on:
+            - db
+        environment:
+            - DATABASE_TYPE=mysql
+            - DATABASE_HOST=localhost
+            - DATABASE_NAME=strider
+            - DATABASE_USERNAME=root
+            - DATABASE_PASSWORD=strider
+            - PORT=3333
