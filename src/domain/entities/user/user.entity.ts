@@ -17,6 +17,10 @@ export class User {
         return new User(props)
     }
 
+    get id(): string {
+        return this.props.id
+    }
+
     get username(): string {
         return this.props.username
     }

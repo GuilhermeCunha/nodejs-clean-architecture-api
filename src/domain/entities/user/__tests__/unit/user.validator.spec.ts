@@ -75,14 +75,23 @@ describe('UserValidator', () => {
                 )
             )
         })
-        it('should  dont return errors if input is valid', () => {
+        it('should dont return errors if input is valid', () => {
             const validator = new UserValidator()
-            const errors = validator.validate({
-                username: 'Valid',
-                createdAt: new Date(),
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any)
+            const errors = validator.validate(userPropsFixture())
             expect(errors).toHaveLength(0)
+        })
+        it('should return error when id is not a string', () => {
+            const validator = new UserValidator()
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const input: any = {
+                ...userPropsFixture(),
+                id: undefined,
+            }
+
+            const errors = validator.validate(input)
+            expect(errors).toContainEqual(
+                expect.stringContaining(`'id' should be a string`)
+            )
         })
     })
 })

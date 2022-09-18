@@ -30,6 +30,9 @@ export class UserValidator implements IValidator<UserProps> {
     validate(input: UserProps): string[] {
         const errors: string[] = []
 
+        if (typeof input.id !== 'string') {
+            errors.push(`'id' should be a string`)
+        }
         errors.push(
             ...this.validateUsername(input.username).map(
                 (error) => `'username' ${error}`

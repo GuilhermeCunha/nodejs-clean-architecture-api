@@ -55,4 +55,14 @@ describe('User', () => {
             expect(user.createdAt).toEqual(input.createdAt)
         })
     })
+
+    describe('get id()', () => {
+        it('should return the id from props', () => {
+            const input = userPropsFixture()
+            jest.spyOn(UserValidator.prototype, 'validate').mockReturnValue([])
+            const post = User.create(input)
+
+            expect(post.id).toEqual(input.id)
+        })
+    })
 })
