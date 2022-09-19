@@ -8,9 +8,15 @@ export class PostEntity {
     type!: string
     @Column()
     authorId!: string
-    @Column()
-    content: undefined
-    @Column()
+    @Column({
+        nullable: true,
+        default: null,
+    })
+    content?: string
+    @Column({
+        nullable: true,
+        default: null,
+    })
     relatedPostId!: string
     @Column()
     createdAt!: Date
