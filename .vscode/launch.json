@@ -1,13 +1,16 @@
 {
     "configurations": [
         {
-            "name": "Start with API",
+            "name": "Start API SQLite",
             "type": "node-terminal",
             "request": "launch",
-            "command": "yarn run start:api",
+            "command": "yarn run dev:api",
             "cwd": "${workspaceRoot}",
             "internalConsoleOptions": "openOnSessionStart",
-            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "DATABASE_TYPE": "sqlite",
+                "PORT": "3333"
+            },
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/**",
