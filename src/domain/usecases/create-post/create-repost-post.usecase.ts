@@ -48,7 +48,7 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
         )
         if (!relatedPostId) {
             throw new NotFoundError({
-                meessage: `Post ${repostPostProps.relatedPostId} was not found`,
+                message: `Post ${repostPostProps.relatedPostId} was not found`,
             })
         }
 
@@ -57,7 +57,7 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
             relatedPostId.type !== 'quote'
         ) {
             throw new NotAllowedError({
-                meessage: `You can only repost posts from the types: original, quote`,
+                message: `You can only repost posts from the types: original, quote`,
             })
         }
 

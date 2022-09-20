@@ -1,4 +1,4 @@
-import { Express, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import { constants as HTTP_STATUS } from 'http2'
 import { PostProps } from '../../../../../domain/entities/post/post.props'
 import { ValidationError } from '../../../../../domain/errors/validation.error'
@@ -8,10 +8,6 @@ import { CreateRepostPostUseCaseFactory } from '../../../../factories/usecases/c
 import { WithErrorHandler } from '../../middlewares/error-handler'
 
 export class PostController {
-    constructor(app: Express) {
-        app.post('/posts', this.create.bind(this))
-    }
-
     @WithErrorHandler()
     async create(req: Request, res: Response) {
         const { type } = req.body as PostProps
@@ -40,6 +36,6 @@ export class PostController {
             return res.status(HTTP_STATUS.HTTP_STATUS_OK).json({ post })
         }
 
-        throw new ValidationError(['body.type should be string'])
+        throw new ValidationError(['body.type should be a valid string'])
     }
 }
