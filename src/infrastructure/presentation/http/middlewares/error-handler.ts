@@ -27,6 +27,7 @@ export function errorHandler(
         return res.status(401).json(err.details)
     }
 
+    console.error('Error', err)
     return res.status(500).json({
         message:
             'Some unexpected error happened, please try again in a few minutes.',
@@ -52,7 +53,6 @@ export function WithErrorHandler() {
                 }
                 return result
             } catch (err) {
-                console.log('WithErrorHandler()', err)
                 return next(err)
             }
         }
