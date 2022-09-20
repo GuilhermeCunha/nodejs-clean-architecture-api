@@ -1,6 +1,6 @@
 import { endOfDay, startOfDay } from 'date-fns'
 import { isNil, omitBy } from 'lodash'
-import { Between, LessThan, MoreThan } from 'typeorm'
+import { Between, LessThanOrEqual, MoreThanOrEqual } from 'typeorm'
 import { PostProps } from '../../../../domain/entities/post/post.props'
 import {
     GetPosts,
@@ -30,9 +30,9 @@ export class TypeormPostRepository implements IPostRepository {
                 filters.createdBefore
             )
         } else if (filters.createdAfter) {
-            parsedFilters.createdAt = MoreThan(filters.createdAfter)
+            parsedFilters.createdAt = MoreThanOrEqual(filters.createdAfter)
         } else if (filters.createdBefore) {
-            parsedFilters.createdAt = LessThan(filters.createdBefore)
+            parsedFilters.createdAt = LessThanOrEqual(filters.createdBefore)
         }
 
         return omitBy(parsedFilters, isNil)

@@ -30,8 +30,12 @@ export class PostController {
             filters: omitBy(
                 {
                     authorId: get(req, 'query.filters.authorId'),
-                    createdAfter: get(req, 'query.filters.createdAfter'),
-                    createdBefore: get(req, 'query.filters.createdBefore'),
+                    createdAfter:
+                        get(req, 'query.filters.createdAfter') &&
+                        new Date(get(req, 'query.filters.createdAfter')),
+                    createdBefore:
+                        get(req, 'query.filters.createdBefore') &&
+                        new Date(get(req, 'query.filters.createdBefore')),
                 },
                 isNil
             ),
