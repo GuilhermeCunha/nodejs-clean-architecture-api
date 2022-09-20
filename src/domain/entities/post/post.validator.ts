@@ -1,5 +1,4 @@
 import { IValidator } from '../../ports/validator'
-import { UserValidator } from '../user/user.validator'
 import { POST_TYPES } from '../../constants'
 import {
     OriginalPostProps,
@@ -108,9 +107,11 @@ export class PostValidator implements IValidator<PostProps> {
     }
 
     validateAuthor(authorId?: string) {
-        return new UserValidator()
-            .validateUsername(authorId)
-            .map((error) => `'authorId' ${error}`)
+        const errors: string[] = []
+        if (typeof authorId !== 'string') {
+            errors.push(`'authorId' should be a string`)
+        }
+        return errors
     }
 
     validate(input: PostProps): string[] {
