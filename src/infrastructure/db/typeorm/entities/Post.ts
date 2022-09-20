@@ -1,4 +1,4 @@
-import { Entity, Column } from 'typeorm'
+import { Entity, Column, JoinColumn, ManyToOne, OneToMany } from 'typeorm'
 
 @Entity('post')
 export class PostEntity {
@@ -18,6 +18,14 @@ export class PostEntity {
         default: null,
     })
     relatedPostId!: string
+
+    @ManyToOne(() => PostEntity, (user) => user.relations)
+    @JoinColumn({ name: 'relatedPostId' })
+    relatedPost?: PostEntity
+
+    @OneToMany(() => PostEntity, (user) => user.relatedPost)
+    relations?: PostEntity
+
     @Column()
     createdAt!: Date
 }
