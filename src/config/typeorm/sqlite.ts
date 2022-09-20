@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { DataSourceOptions } from 'typeorm'
+import * as path from 'path'
 
 const modelsRelativePath = 'src/infrastructure/db/typeorm/entities/*.{ts,js}'
 const migrationsRelativePath =
@@ -7,8 +8,8 @@ const migrationsRelativePath =
 
 export default {
     type: 'sqlite',
-    database: ':memory:',
-    dropSchema: true,
+    database: `${path.resolve(__dirname, '..', '..', '..')}/data/line.sqlite`,
+    dropSchema: false,
     synchronize: true,
     entities: [modelsRelativePath],
     migrations: [migrationsRelativePath],
