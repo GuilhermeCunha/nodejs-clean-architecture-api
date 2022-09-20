@@ -2,9 +2,18 @@ import 'dotenv/config'
 import { DataSourceOptions } from 'typeorm'
 import * as path from 'path'
 
-const modelsRelativePath = 'src/infrastructure/db/typeorm/entities/*.{ts,js}'
-const migrationsRelativePath =
-    'src/infrastructure/db/typeorm/sqlite/migrations/*.{ts,js}'
+const modelsRelativePath = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    'infrastructure/db/typeorm/entities/*.{ts,js}'
+)
+const migrationsRelativePath = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    'infrastructure/db/typeorm/sqlite/migrations/*.{ts,js}'
+)
 
 export default {
     type: 'sqlite',
