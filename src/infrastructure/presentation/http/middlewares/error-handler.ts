@@ -1,26 +1,30 @@
 import { constants as HTTP_CONSTANTS } from 'http2'
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { ValidationError } from '../../../../domain/errors/validation.error'
 import { NotAllowedError } from '../../../../domain/errors/not-allowed.error'
 import { NotFoundError } from '../../../../domain/errors/not-found.error'
 
-export async function errorHandler(err: Error, req: Request, res: Response) {
+export function errorHandler(
+    err: Error,
+    req: Request,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction
+) {
     if (err instanceof ValidationError) {
-        return res
-            .status(HTTP_CONSTANTS.HTTP_STATUS_BAD_REQUEST)
-            .json(err.errors)
+        return res.status(HTTP_CONSTANTS.HTTP_STATUS_BAD_REQUEST).json({
+            errors: err.details,
+        })
     }
 
     if (err instanceof NotFoundError) {
-        return res.status(HTTP_CONSTANTS.HTTP_STATUS_NOT_FOUND).json({
-            message: err.message,
-        })
+        return res
+            .status(HTTP_CONSTANTS.HTTP_STATUS_NOT_FOUND)
+            .json(err.details)
     }
 
     if (err instanceof NotAllowedError) {
-        return res.status(401).json({
-            message: err.message,
-        })
+        return res.status(401).json(err.details)
     }
 
     return res.status(500).json({
@@ -48,7 +52,7 @@ export function WithErrorHandler() {
                 }
                 return result
             } catch (err) {
-                console.error('Error', err)
+                console.log('WithErrorHandler()', err)
                 return next(err)
             }
         }
