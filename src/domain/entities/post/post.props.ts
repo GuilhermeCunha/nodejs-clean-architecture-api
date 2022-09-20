@@ -2,6 +2,9 @@ import { POST_TYPES } from '../../constants'
 
 export type PostType = typeof POST_TYPES[number]
 
+export type PostWithRelatedPostProps<Type = PostProps> = Type & {
+    relatedPost: PostProps | null
+}
 export type OriginalPostProps = {
     type: 'original'
     id: string

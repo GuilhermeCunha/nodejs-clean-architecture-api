@@ -40,19 +40,26 @@ export class TypeormPostRepository implements IPostRepository {
     async getPosts({
         filters = {},
         pagination,
+        sorts = {},
+        expands = {},
     }: GetPosts): Promise<GetPostsResponse> {
         const parsedFilters = this.parseFilters(filters)
 
         const database = await this.database.getDatabase()
         const repository = database.getRepository(PostEntity)
 
-        const [posts, total] = await repository.findAndCount({
+        const [results, total] = await repository.findAndCount({
             where: parsedFilters,
             skip: pagination.skip,
             take: pagination.skip,
+            order: sorts,
+            relations: Object.entries(expands)
+                .filter(([, value]) => !!value)
+                .map(([key]) => key),
         })
+
         return {
-            posts: posts as PostProps[],
+            results: results as PostProps[],
             pagination: {
                 ...pagination,
                 total,

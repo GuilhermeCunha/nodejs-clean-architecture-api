@@ -1,14 +1,28 @@
-import { PostProps } from '../../entities/post/post.props'
+import {
+    PostProps,
+    PostWithRelatedPostProps,
+} from '../../entities/post/post.props'
+import { SortValue } from './shared'
 
 export type GetPosts = {
     filters?: PostFilters
+    sorts?: PostSorts
+    expands?: PostExpands
     pagination: GetPostsPagination
+}
+
+export type PostSorts = {
+    createdAt?: SortValue
 }
 
 export type PostFilters = {
     authorId?: string
     createdAfter?: Date
     createdBefore?: Date
+}
+
+export type PostExpands = {
+    relatedPost?: boolean
 }
 
 export type GetPostsPagination = {
@@ -23,7 +37,7 @@ export type GetPostsResponsePagination = {
 }
 
 export type GetPostsResponse = {
-    posts: PostProps[]
+    results: (PostProps | PostWithRelatedPostProps)[]
     pagination: GetPostsResponsePagination
 }
 
