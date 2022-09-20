@@ -12,6 +12,7 @@ httpApp.get('/ping', (_req, res) => res.send('pong'))
 const postController = new PostController()
 
 httpApp.post('/posts', postController.create.bind(postController))
+httpApp.get('/posts', postController.getMany.bind(postController))
 
 httpApp.use(function (
     err: Error,
