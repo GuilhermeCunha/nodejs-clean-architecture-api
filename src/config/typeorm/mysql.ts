@@ -19,4 +19,5 @@ export default {
     password: process.env.DATABASE_PASSWORD,
     entities: TYPE_ORM_ENTITIES,
     migrations: [migrationsRelativePath],
+    migrationsRun: true,
 } as DataSourceOptions
