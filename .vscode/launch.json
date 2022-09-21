@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Start API SQLite",
+            "name": "Start API with SQLite",
             "type": "node-terminal",
             "request": "launch",
             "command": "yarn run dev:api",
@@ -10,6 +10,22 @@
             "env": {
                 "DATABASE_TYPE": "sqlite",
                 "PORT": "3333"
+            },
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/**",
+                "!**/node_modules/**"
+            ]
+        },
+        {
+            "name": "Start Lambda API with SQLite",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "yarn run dev:lambda:api",
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart",
+            "env": {
+                "DATABASE_TYPE": "sqlite"
             },
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "resolveSourceMapLocations": [

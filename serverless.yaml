@@ -1,0 +1,42 @@
+service: serverless-boilerplate
+
+custom:
+    # Our stage is based on what is passed in when running serverless
+    # commands. Or falls back to what we have set in the provider section.
+    stage: ${opt:stage, 'offline'}
+    region: ${opt:region, 'us-east-1'}
+    bundle:
+        linting: false
+        excludeFiles: '**/*.spec.ts'
+        aliases:
+            - 'typeorm': 'node_modules/typeorm/browser' # see https://github.com/typeorm/typeorm/issues/8714
+        externals:
+            - typeorm
+            - sqlite3
+            - mysql2
+    serverless-offline:
+        httpPort: 3333
+        noPrependStageInUrl: true
+
+provider:
+    name: aws
+    runtime: nodejs14.x
+    memorySize: 512
+    timeout: 30
+    logRetentionInDays: 90
+
+functions:
+    app:
+        handler: src/infrastructure/presentation/lambda/handler.handler
+        events:
+            - httpApi:
+                  path: '/{proxy+}'
+                  method: '*'
+
+package:
+    individually: true
+
+plugins:
+    - serverless-dotenv-plugin
+    - serverless-bundle
+    - serverless-offline

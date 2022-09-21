@@ -4,3 +4,4 @@ node_modules
 posterr-api-mysql-database-volume/
 coverage
 *.sqlite
+.webpack
