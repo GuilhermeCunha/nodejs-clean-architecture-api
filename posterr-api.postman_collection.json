@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "7e194367-2880-47de-9f17-0a8376a38edb",
+		"name": "posterr-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17741413"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "list posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "sorts[createdAt]",
+									"value": "-1",
+									"disabled": true
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "pagination[skip]",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "expands[relatedPost]",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "filters[authorId]",
+									"value": "6fae1d93-b304-4e86-94ba-96feed7c175f",
+									"disabled": true
+								},
+								{
+									"key": "filters[createdAfter]",
+									"value": "2022-09-18T04:00:00.000Z",
+									"disabled": true
+								},
+								{
+									"key": "filters[createdBefore]",
+									"value": "2022-09-20T01:38:50.241Z",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create quote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"quote\",\r\n    \"authorId\": \"aaaaaaaa-b304-4e86-94ba-96feed7c175f\",\r\n    \"content\": \"First post\",\r\n    \"relatedPostId\": \"94e1bf27-4844-496b-9a6a-8e35845bc97c\",\r\n    \"createdAt\": \"19/09/2022 20:02:03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create original",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"original\",\r\n    \"authorId\": \"aaaaaaaa-b304-4e86-94ba-96feed7c175f\",\r\n    \"content\": \"First post\",\r\n    \"createdAt\": \"19/09/2022 20:02:03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create repost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"repost\",\r\n    \"authorId\": \"aaaaaaaa-b304-4e86-94ba-96feed7c175f\",\r\n    \"relatedPostId\": \"78569b57-ec30-4f63-97fa-44c3591c2c96\",\r\n    \"createdAt\": \"19/09/2022 20:02:03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "list-user-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/users/aaaaaaaa-b304-4e86-94ba-96feed7c175f/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users",
+								"aaaaaaaa-b304-4e86-94ba-96feed7c175f",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

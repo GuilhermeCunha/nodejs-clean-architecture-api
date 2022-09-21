@@ -1,19 +1,70 @@
 # Guilherme Cunha - Strider Backend Assessment
 
 ## About
-This project is a 100% functional API created using Clean Architecture. At the moment this API can be run serverless or not, besides allowing to choose between SQLite and MySQL databases. 
+This project is a 100% functional API with filtering, paging, sorting and expansion created using Clean Architecture. At the moment this API can be run serverless or not, besides allowing to choose between SQLite and MySQL databases. 
 
 The project has several tools that help in the quality and maintainability of the code, such as Jest, Prettier, Eslint, Supertest, and a Debug already configured for VS Code.
+
+To facilitate testing, I created the possible API calls in Postman, and you can import them through the file "posterr-api.postman_collection.json". Additionally, I created seeds to insert the following users and posts into the database:
+```javascript
+// Users
+[
+    {
+        "id": "aaaaaaaa-b304-4e86-94ba-96feed7c175f",
+        "username": "jhon",
+        "createdAt": "2022-09-18T03:00:00.000Z"
+    },
+    {
+        "id": "bbbbbbbb-b304-4e86-94ba-96feed7c175f",
+        "username": "guilherme",
+        "createdAt": "2022-09-18T03:00:00.000Z"
+    },
+    {
+        "id": "0894f7a5-9fae-4673-a192-f051b8d0f4a3",
+        "username": "Daniela",
+        "createdAt": "..."
+    },
+    {
+        "id": "b3e02e08-aed9-403f-9ea3-4475e42bf6cb",
+        "username": "Gabriel",
+        "createdAt": "..."
+    }
+]
+[
+  {
+    "id": "c938ac07-615d-4d3c-b812-4876923a14c4",
+    "type": "repost",
+    "authorId": "aaaaaaaa-b304-4e86-94ba-96feed7c175f",
+    "content": "Example post 3",
+    "relatedPostId": "e56e54e5-dbed-4fcb-9c42-b354096625f4",
+    "createdAt": "2022-09-18T03:00:00.000Z"
+  },
+  {
+    "id": "deb8382d-57b5-4a83-ab7f-d767891e2790",
+    "type": "original",
+    "authorId": "aaaaaaaa-b304-4e86-94ba-96feed7c175f",
+    "content": "Example post 1",
+    "relatedPostId": null,
+    "createdAt": "2022-09-18T03:00:00.000Z"
+  },
+  {
+    "id": "e56e54e5-dbed-4fcb-9c42-b354096625f4",
+    "type": "quote",
+    "authorId": "aaaaaaaa-b304-4e86-94ba-96feed7c175f",
+    "content": "Example post 2",
+    "relatedPostId": "deb8382d-57b5-4a83-ab7f-d767891e2790",
+    "createdAt": "2022-09-18T03:00:00.000Z"
+  }
+]
+// Posts
+
+```
 ## Setup
+These are the different ways of running the API, feel free to use your favorite, as they all have the same functionality.
+
 ### Setup conventional API
 
-#### Using Docker and MySQL (suggested)
-1. Use docker-compose
-```bash
-podman-compose up -d
-```
-4. There, the API will be available in http://localhost:3333
-#### Using VS Code Debugger and SQLite (easiest)
+#### Using VS Code Debugger and SQLite
 1. Install NodeJs at a version 14 or higher
 2. Install the project dependencies
 ```bash
@@ -21,7 +72,12 @@ yarn install
 ```
 3. You need to click on the debug option called "Start API with SQLite"
 4. There, the API will be available in http://localhost:3333
-
+#### Using Docker and MySQL
+1. Use docker-compose
+```bash
+podman-compose up -d
+```
+4. There, the API will be available in http://localhost:3333
 #### Using manual configuration and SQLite
 1. Install NodeJs at a version 14 or higher
 2. Install the project dependencies
