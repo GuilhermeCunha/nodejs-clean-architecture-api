@@ -12,10 +12,9 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint": "eslint src --ext .ts,.js",
-    "test": "jest --collect-coverage --passWithNoTests --testPathPattern=__tests__/",
+    "test": "jest --collect-coverage --passWithNoTests --testPathPattern=__tests__/ --forceExit",
     "test:unit": "jest --passWithNoTests --testPathPattern=__tests__/unit",
     "test:integration": "jest --passWithNoTests --testPathPattern=__tests__/instegration",
-    "test:e2e": "jest --passWithNoTests --testPathPattern=__tests__/e2e",
     "build": "tsc",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
