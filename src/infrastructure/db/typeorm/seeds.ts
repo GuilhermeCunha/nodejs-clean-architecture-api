@@ -8,7 +8,8 @@ const now = new Date('9/18/2022')
 export const runSeeds = async () => {
     const typeormDatabase = new TypeORMDatabase(CONFIG)
 
-    const authorId = '6fae1d93-b304-4e86-94ba-96feed7c175f'
+    const authorId = 'aaaaaaaa-b304-4e86-94ba-96feed7c175f'
+    const secondAuthorId = 'bbbbbbbb-b304-4e86-94ba-96feed7c175f'
 
     const manager = await typeormDatabase.getDatabase()
 
@@ -34,7 +35,17 @@ export const runSeeds = async () => {
         })
         .orIgnore()
         .execute()
-
+    await manager
+        .createQueryBuilder()
+        .insert()
+        .into(UserEntity)
+        .values({
+            id: secondAuthorId,
+            createdAt: now,
+            username: 'guilherme',
+        })
+        .orIgnore()
+        .execute()
     const originalPostId = 'deb8382d-57b5-4a83-ab7f-d767891e2790'
     await manager
         .createQueryBuilder()
