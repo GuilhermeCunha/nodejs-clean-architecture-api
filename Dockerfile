@@ -9,4 +9,4 @@ RUN yarn cache clean
 EXPOSE 3333
 EXPOSE 3334
 
-CMD ["./start-api-with-mysql.sh"]
+CMD [ "node", "dist/infrastructure/presentation/http/index.js" ]
