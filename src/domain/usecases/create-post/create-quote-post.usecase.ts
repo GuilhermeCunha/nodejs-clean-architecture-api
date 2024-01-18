@@ -27,7 +27,7 @@ export class CreateQuotePostUseCase implements ICreateQuotePostUseCase {
         const postsMadeToday =
             await this.props.postRepository.countPostsByUserInADay(
                 authorId,
-                today
+                today,
             )
 
         if (postsMadeToday > 5) throw new DailyPostLimitError(authorId)
@@ -44,11 +44,11 @@ export class CreateQuotePostUseCase implements ICreateQuotePostUseCase {
         const entity = Post.create(quotePostProps)
 
         const relatedPostId = await this.props.postRepository.getPostById(
-            quotePostProps.relatedPostId
+            quotePostProps.relatedPostId,
         )
         if (!relatedPostId) {
             throw new NotFoundError({
-                message: `Post ${quotePostProps.relatedPostId} was not found`,
+                message: `Related post ${quotePostProps.relatedPostId} was not found`,
             })
         }
 
