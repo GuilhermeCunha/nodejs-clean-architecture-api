@@ -7,22 +7,22 @@ export class UserValidator implements IValidator<UserProps> {
     }
 
     validateUsername(username?: string) {
+        if (typeof username !== 'string') {
+            return ['should be a string']
+        }
+
         const errors: string[] = []
 
-        if (typeof username !== 'string') {
-            errors.push(`should be a string`)
-        } else {
-            if (username.length < 1) {
-                errors.push(`should have at least one character`)
-            }
+        if (username.length < 1) {
+            errors.push(`should have at least one character`)
+        }
 
-            if (username.length > 14) {
-                errors.push(`should have at most 14 characters`)
-            }
+        if (username.length > 14) {
+            errors.push(`should have at most 14 characters`)
+        }
 
-            if (!this.isAlphanumericOnly(username)) {
-                errors.push(`should be alphanumeric characters only`)
-            }
+        if (!this.isAlphanumericOnly(username)) {
+            errors.push(`should be alphanumeric characters only`)
         }
 
         return errors
@@ -33,6 +33,7 @@ export class UserValidator implements IValidator<UserProps> {
         if (typeof input.id !== 'string') {
             errors.push(`'id' should be a string`)
         }
+
         errors.push(
             ...this.validateUsername(input.username).map(
                 (error) => `'username' ${error}`
