@@ -6,9 +6,9 @@ services:
             - '3306:3306'
         image: mysql:latest
         environment:
-            MYSQL_DATABASE: strider
-            MYSQL_ROOT_PASSWORD: strider
-            MYSQL_USER: strider
+            MYSQL_DATABASE: posts
+            MYSQL_ROOT_PASSWORD: posts
+            MYSQL_USER: posts
         restart: always
         healthcheck:
             test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
@@ -34,7 +34,7 @@ services:
         environment:
             - DATABASE_TYPE=mysql
             - DATABASE_HOST=mysql-database
-            - DATABASE_NAME=strider
+            - DATABASE_NAME=posts
             - DATABASE_USERNAME=root
-            - DATABASE_PASSWORD=strider
+            - DATABASE_PASSWORD=posts
             - PORT=3333
