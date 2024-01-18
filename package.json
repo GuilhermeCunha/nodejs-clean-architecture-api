@@ -1,5 +1,5 @@
 {
-  "name": "posterr-api",
+  "name": "posts-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "Guilherme Cunha <guiscunha@gmail.com>",

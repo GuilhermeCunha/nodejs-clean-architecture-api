@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "7e194367-2880-47de-9f17-0a8376a38edb",
-		"name": "posterr-api",
+		"name": "posts-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17741413"
 	},

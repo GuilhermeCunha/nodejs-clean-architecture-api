@@ -1,11 +1,11 @@
-# Guilherme Cunha - Strider Backend Assessment
+# API using Clean Architecture
 
 ## About
-This project is a 100% functional API with filtering, paging, sorting and expansion created using Clean Architecture. At the moment this API can be run serverless or not, besides allowing to choose between SQLite and MySQL databases. 
+This project is a 100% functional API with filtering, paging, sorting created using Clean Architecture. At the moment this API can be run serverless or not, besides allowing to choose between SQLite and MySQL databases. 
 
 The project has several tools that help in the quality and maintainability of the code, such as Jest, Prettier, Eslint, Supertest, and a Debug already configured for VS Code.
 
-To facilitate testing, I created the possible API calls in Postman, and you can import them through the file "posterr-api.postman_collection.json". Additionally, I created seeds to insert the following users and posts into the database:
+To facilitate testing, I created the possible API calls in Postman, and you can import them through the file "posts-api.postman_collection.json". Additionally, I created seeds to insert the following users and posts into the database:
 ```javascript
 // Users
 [
@@ -65,7 +65,7 @@ These are the different ways of running the API, feel free to use your favorite,
 ### Setup conventional API
 
 #### Using VS Code Debugger and SQLite
-1. Install NodeJs at a version 14 or higher
+1. Install NodeJs at a version 20
 2. Install the project dependencies
 ```bash
 yarn install
@@ -75,16 +75,16 @@ yarn install
 #### Using Docker and MySQL
 1. Use docker-compose
 ```bash
-podman-compose up -d
+docker-compose up -d
 ```
 4. There, the API will be available in http://localhost:3333
 #### Using manual configuration and SQLite
-1. Install NodeJs at a version 14 or higher
+1. Install NodeJs at a version 20
 2. Install the project dependencies
 ```bash
 yarn install
 ```
-3. Configure o arquivo .env com as informaçoes abaixo:
+3. Configure the .env file with these values:
 ```text
 DATABASE_TYPE=sqlite
 PORT=3333
@@ -96,7 +96,7 @@ yarn run dev:api
 5. There, the API will be available in http://localhost:3333
 
 #### Using manual configuration and MySQL
-1. Install NodeJs at a version 14 or higher
+1. Install NodeJs at a version 20
 2. Install the project dependencies
 ```bash
 yarn install
@@ -123,7 +123,7 @@ yarn run dev:api
 ### Setup Serverless API
 
 #### Using VS Code Debugger and SQLite
-1. Install NodeJs at a version 14 or higher
+1. Install NodeJs at a version 20
 2. Install the project dependencies
 ```bash
 yarn install
@@ -131,7 +131,7 @@ yarn install
 3. You need to click on the debug option called "Start Lambda API with SQLite"
 4. There, the API will be available in http://localhost:3333
 #### Using manual configuration and SQLite
-1. Install NodeJs at a version 14 or higher
+1. Install NodeJs at a version 20
 2. Install the project dependencies
 ```bash
 yarn install
