@@ -73,9 +73,26 @@ yarn install
 3. You need to click on the debug option called "Start API with SQLite"
 4. There, the API will be available in http://localhost:3333
 #### Using Docker and MySQL
+
+While developing, you can use docker-compose without having to do any manual actions, and the project will be running.
 1. Use docker-compose
 ```bash
 docker-compose up -d
+```
+
+When you want to run the project in production mode, just configure the .env and run the production docker-compose.
+1. Configure the .env file with the keys below, keeping DATA_TYPE and PORT, and changing the other variables with correct values:
+```text
+DATABASE_TYPE=mysql
+DATABASE_HOST={{your-value-here}}
+DATABASE_NAME={{your-value-here}}
+DATABASE_USERNAME={{your-value-here}}
+DATABASE_PASSWORD={{your-value-here}}
+PORT=3333
+```
+2. Run the production docker-compose
+```bash
+docker-compose -f docker-compose.production.yaml up
 ```
 4. There, the API will be available in http://localhost:3333
 #### Using manual configuration and SQLite
@@ -146,6 +163,29 @@ PORT=3333
 yarn run dev:lambda:api
 ```
 5. There, the API will be available in http://localhost:3333
+
+## How run tests
+To run the tests, you can choose to use Docker or not
+
+### How run tests with Docker
+```shell
+## you can use the docker script directly
+docker run -v $PWD:/app -it --rm -w /app node:20 yarn install && yarn run test
+
+# or you can run the run-tests bash script
+bash run-tests.sh
+```
+
+### How run tests without Docker
+1. Install NodeJs at a version 20
+2. Install the project dependencies
+```bash
+yarn install
+```
+2. Run the yarn test script
+```bash
+yarn run test
+```
 
 ## Critique
 ### About scaling
