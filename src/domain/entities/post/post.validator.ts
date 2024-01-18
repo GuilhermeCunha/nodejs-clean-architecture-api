@@ -36,7 +36,7 @@ export class PostValidator implements IValidator<PostProps> {
 
         errors.push(...this.validateId(input.id))
         errors.push(...this.validateAuthor(input.authorId))
-        errors.push(...this.validateContent(input.authorId))
+        errors.push(...this.validateContent(input.content))
 
         if (typeof input.relatedPostId !== 'undefined') {
             errors.push(`'relatedPostId' should be undefined`)
