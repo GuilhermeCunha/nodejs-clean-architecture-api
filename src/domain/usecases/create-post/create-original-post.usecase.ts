@@ -1,3 +1,4 @@
+import { POST_DAILY_LIMIT } from '../../constants'
 import { Post } from '../../entities/post/post.entity'
 import { OriginalPostProps } from '../../entities/post/post.props'
 import { DailyPostLimitError } from '../../errors/daily-post-limit.error'
@@ -25,14 +26,15 @@ export class CreateOriginalPostUseCase implements ICreateOriginalPostUseCase {
         const postsMadeToday =
             await this.props.postRepository.countPostsByUserInADay(
                 authorId,
-                today
+                today,
             )
 
-        if (postsMadeToday > 5) throw new DailyPostLimitError(authorId)
+        if (postsMadeToday > POST_DAILY_LIMIT)
+            throw new DailyPostLimitError(authorId)
     }
 
     async execute(
-        input: CreateOriginalInput
+        input: CreateOriginalInput,
     ): Promise<CreateOriginalPostOutput> {
         const id = this.props.identifierFactory.create()
 

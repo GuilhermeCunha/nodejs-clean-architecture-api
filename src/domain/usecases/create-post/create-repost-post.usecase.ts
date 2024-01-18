@@ -1,3 +1,4 @@
+import { POST_DAILY_LIMIT } from '../../constants'
 import { Post } from '../../entities/post/post.entity'
 import { RepostPostProps } from '../../entities/post/post.props'
 import { DailyPostLimitError } from '../../errors/daily-post-limit.error'
@@ -27,10 +28,11 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
         const postsMadeToday =
             await this.props.postRepository.countPostsByUserInADay(
                 authorId,
-                today
+                today,
             )
 
-        if (postsMadeToday > 5) throw new DailyPostLimitError(authorId)
+        if (postsMadeToday > POST_DAILY_LIMIT)
+            throw new DailyPostLimitError(authorId)
     }
 
     async execute(input: CreateRepostInput): Promise<CreateRepostPostOutput> {
@@ -44,7 +46,7 @@ export class CreateRepostPostUseCase implements ICreateRepostPostUseCase {
         const entity = Post.create(repostPostProps)
 
         const relatedPostId = await this.props.postRepository.getPostById(
-            repostPostProps.relatedPostId
+            repostPostProps.relatedPostId,
         )
         if (!relatedPostId) {
             throw new NotFoundError({

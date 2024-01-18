@@ -1,3 +1,4 @@
+import { POST_DAILY_LIMIT } from '../../constants'
 import { Post } from '../../entities/post/post.entity'
 import { QuotePostProps } from '../../entities/post/post.props'
 import { DailyPostLimitError } from '../../errors/daily-post-limit.error'
@@ -30,7 +31,8 @@ export class CreateQuotePostUseCase implements ICreateQuotePostUseCase {
                 today,
             )
 
-        if (postsMadeToday > 5) throw new DailyPostLimitError(authorId)
+        if (postsMadeToday > POST_DAILY_LIMIT)
+            throw new DailyPostLimitError(authorId)
     }
 
     async execute(input: CreateQuoteInput): Promise<CreateQuotePostOutput> {
