@@ -1,10 +1,12 @@
 import { Request, Response } from 'express'
 import { constants as HTTP_STATUS } from 'http2'
-import { get, isNil, omitBy } from 'lodash'
+import { get } from 'lodash'
 import { PostProps } from '../../../../../domain/entities/post/post.props'
 import { ValidationError } from '../../../../../domain/errors/validation.error'
 import {
     GetPosts,
+    GetPostsResponse,
+    PostFilters,
     PostSorts,
 } from '../../../../../domain/ports/repositories/post-repository'
 import { SortValue } from '../../../../../domain/ports/repositories/shared'
@@ -14,34 +16,59 @@ import { CreateRepostPostUseCaseFactory } from '../../../../factories/usecases/c
 import { ListPostsUseCaseFactory } from '../../../../factories/usecases/list-posts.usecase.factory'
 import { WithErrorHandler } from '../../middlewares/error-handler'
 
+const DEFAULT_POST_LIMIT = 10
+const DEFAULT_POST_SKIP = 0
+const DEFAULT_POST_CREATED_AT_SORT = -1
+
 export class PostController {
     @WithErrorHandler()
-    async getMany(req: Request, res: Response) {
+    async getMany(
+        req: Request<
+            any,
+            GetPostsResponse,
+            any,
+            { filters: PostFilters; sorts: { createdAt: SortValue } }
+        >,
+        res: Response,
+    ) {
         const sorts: PostSorts = {
-            createdAt: Number(
-                get(req, 'query.sorts.createdAt', -1)
-            ) as SortValue,
+            createdAt: get(
+                req,
+                'query.sorts.createdAt',
+                DEFAULT_POST_CREATED_AT_SORT,
+            ),
         }
+        const limit = Number(
+            get(req, 'query.pagination.limit', DEFAULT_POST_LIMIT),
+        )
+        const skip = Number(
+            get(req, 'query.pagination.skip', DEFAULT_POST_SKIP),
+        )
+
+        const createdAfter = get(req.query, 'filters.createdAfter')
+        const createdBefore = get(req.query, 'filters.createdBefore')
+        const shouldExpandRelatedPost =
+            get(req.query, 'expands.relatedPost') === 'true'
+
+        const filters: PostFilters = {}
+
+        if (createdAfter) {
+            filters['createdAfter'] = createdAfter
+        }
+
+        if (createdBefore) {
+            filters['createdBefore'] = createdBefore
+        }
+
         const input: GetPosts = {
             pagination: {
-                limit: Number(get(req, 'query.pagination.limit')) || 10,
-                skip: Number(get(req, 'query.pagination.skip')) || 0,
+                limit,
+                skip,
             },
-            filters: omitBy(
-                {
-                    authorId: get(req, 'query.filters.authorId'),
-                    createdAfter:
-                        get(req, 'query.filters.createdAfter') &&
-                        new Date(get(req, 'query.filters.createdAfter')),
-                    createdBefore:
-                        get(req, 'query.filters.createdBefore') &&
-                        new Date(get(req, 'query.filters.createdBefore')),
-                },
-                isNil
-            ),
+            filters,
             sorts,
             expands: {
-                relatedPost: get(req, 'query.expands.relatedPost') === 'true',
+                relatedPost: shouldExpandRelatedPost,
             },
         }
 
@@ -56,7 +83,7 @@ export class PostController {
         if (type === 'original') {
             const post =
                 await CreateOriginalPostUseCaseFactory.create().execute(
-                    req.body
+                    req.body,
                 )
 
             return res.status(HTTP_STATUS.HTTP_STATUS_OK).json({ post })
@@ -64,14 +91,14 @@ export class PostController {
 
         if (type === 'quote') {
             const post = await CreateQuotePostUseCaseFactory.create().execute(
-                req.body
+                req.body,
             )
 
             return res.status(HTTP_STATUS.HTTP_STATUS_OK).json({ post })
         }
         if (type === 'repost') {
             const post = await CreateRepostPostUseCaseFactory.create().execute(
-                req.body
+                req.body,
             )
 
             return res.status(HTTP_STATUS.HTTP_STATUS_OK).json({ post })
