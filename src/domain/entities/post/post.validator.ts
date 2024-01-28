@@ -1,5 +1,5 @@
 import { IValidator } from '../../ports/validator'
-import { POST_TYPES } from '../../constants'
+import { POST_MAX_CONTENT_LENGTH, POST_TYPES } from '../../constants'
 import {
     OriginalPostProps,
     PostProps,
@@ -65,7 +65,7 @@ export class PostValidator implements IValidator<PostProps> {
 
         if (!content || content.length < 1) {
             errors.push(`'content' should have at least one character`)
-        } else if (content.length > 777) {
+        } else if (content.length > POST_MAX_CONTENT_LENGTH) {
             errors.push(`'content' should have at most 777 characters`)
         }
 
@@ -88,8 +88,8 @@ export class PostValidator implements IValidator<PostProps> {
         if (!POST_TYPES.includes(type as PostType)) {
             errors.push(
                 `'type' should have one of the following values: ${POST_TYPES.join(
-                    ','
-                )}`
+                    ',',
+                )}`,
             )
         }
 

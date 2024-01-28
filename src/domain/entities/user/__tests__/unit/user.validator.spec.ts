@@ -1,3 +1,7 @@
+import {
+    USER_USERNAME_MAX_LENGTH,
+    USER_USERNAME_MIN_LENGTH,
+} from '../../../../constants'
 import { UserValidator } from '../../user.validator'
 import { userPropsFixture } from '../fixtures/user.props.fixture'
 
@@ -27,7 +31,7 @@ describe('UserValidator', () => {
                     const errors = validator.validateUsername(username)
 
                     expect(errors).toContainEqual(
-                        expect.stringContaining(`should be a string`)
+                        expect.stringContaining(`should be a string`),
                     )
                 })
             })
@@ -38,8 +42,8 @@ describe('UserValidator', () => {
                 const errors = validator.validateUsername(username)
                 expect(errors).toContainEqual(
                     expect.stringContaining(
-                        `should have at least one character`
-                    )
+                        `should have at least ${USER_USERNAME_MIN_LENGTH} character`,
+                    ),
                 )
             })
             it('should return error is greater than 14', () => {
@@ -49,7 +53,9 @@ describe('UserValidator', () => {
                 const errors = validator.validateUsername(username)
 
                 expect(errors).toContainEqual(
-                    expect.stringContaining(`should have at most 14 characters`)
+                    expect.stringContaining(
+                        `should have at most ${USER_USERNAME_MAX_LENGTH} characters`,
+                    ),
                 )
             })
         })
@@ -71,8 +77,8 @@ describe('UserValidator', () => {
             expect(validateUsernameSpy).toBeCalledWith(input.username)
             expect(errors).toEqual(
                 expect.arrayContaining(
-                    mockedErrors.map((error) => `'username' ${error}`)
-                )
+                    mockedErrors.map((error) => `'username' ${error}`),
+                ),
             )
         })
         it('should dont return errors if input is valid', () => {
@@ -90,7 +96,7 @@ describe('UserValidator', () => {
 
             const errors = validator.validate(input)
             expect(errors).toContainEqual(
-                expect.stringContaining(`'id' should be a string`)
+                expect.stringContaining(`'id' should be a string`),
             )
         })
     })

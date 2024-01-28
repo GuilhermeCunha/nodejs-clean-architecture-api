@@ -1,3 +1,7 @@
+import {
+    USER_USERNAME_MAX_LENGTH,
+    USER_USERNAME_MIN_LENGTH,
+} from '../../constants'
 import { IValidator } from '../../ports/validator'
 import { UserProps } from './user.props'
 
@@ -13,12 +17,16 @@ export class UserValidator implements IValidator<UserProps> {
 
         const errors: string[] = []
 
-        if (username.length < 1) {
-            errors.push(`should have at least one character`)
+        if (username.length < USER_USERNAME_MIN_LENGTH) {
+            errors.push(
+                `should have at least ${USER_USERNAME_MIN_LENGTH} character`,
+            )
         }
 
-        if (username.length > 14) {
-            errors.push(`should have at most 14 characters`)
+        if (username.length > USER_USERNAME_MAX_LENGTH) {
+            errors.push(
+                `should have at most ${USER_USERNAME_MAX_LENGTH} characters`,
+            )
         }
 
         if (!this.isAlphanumericOnly(username)) {
@@ -36,8 +44,8 @@ export class UserValidator implements IValidator<UserProps> {
 
         errors.push(
             ...this.validateUsername(input.username).map(
-                (error) => `'username' ${error}`
-            )
+                (error) => `'username' ${error}`,
+            ),
         )
 
         return errors
